@@ -1,0 +1,29 @@
+﻿@model List<Vidly.Models.Movie>
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<h1>Movies</h1>
+
+<a asp-controller="Movies" asp-action="New" class="btn btn-primary mt-2">New Movie</a>
+
+<table class="table table-bordered table-hover mt-4">
+    <thead>
+        <tr>
+            <th>Movies</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var movie in Model)
+    {
+        <tr>
+            <td><a asp-controller="Movies", asp-action="Edit", asp-route-id="@movie.Id">@movie.Name</a> </td>
+            @*<td>@Html.ActionLink(@movie.Name, "Details", "Movies", new {id = @movie.Id})</td>*@
+            <td>@movie.Genre.Name</td>
+        </tr>
+    }
+    </tbody>
+
+</table>
+

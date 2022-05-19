@@ -1,0 +1,70 @@
+﻿@model Vidly.ViewModels.CustomerFormViewModel
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<h2>Customer</h2>
+
+<form asp-controller="Customers" asp-action="Save" asp-antiforgery="true" asp-route-model="@Model.Customer">
+@*@using (Html.BeginForm("Save","Customers"))
+{*@
+    @*@Html.HiddenFor(c => c.Customer.Id)*@
+    @*@Html.ValidationSummary(true, "Please fix the following errors.")*@
+    <div asp-validation-summary=ModelOnly>
+        <span>Please fix the following errors.</span>
+    </div>
+    <input type="hidden" asp-for=Customer.Id>
+    <div class="col-md-6">
+        <div class="row mt-4">
+            <label asp-for=Customer.Name class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-6">
+                <input type="text" asp asp-for=Customer.Name class="form-control"/>
+                @*@Html.ValidationMessageFor(c => c.Customer.Name)*@
+                <span asp-validation-for=Customer.Name></span>
+            </div>
+        </div>
+       @* <div class="row mt-4">
+            @Html.LabelFor(c => c.Customer.Name, new { @class = "col-sm-3 col-form-label"})
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control"})
+            </div>
+        </div>*@
+        
+        <div class="row mt-4">
+            @Html.LabelFor(c => c.Customer.MembershipTypeId, labelText: "Membership Type", new { @class = "col-sm-3 col-form-label"})
+            <div class="col-sm-6">
+                @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-select"})
+                @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <label asp-for=Customer.BirthDate class="col-sm-3 col-form-label">Date of Birth</label>
+            <div class="col-sm-6">
+                <input type="date" asp-for=Customer.BirthDate class="form-control">
+                <span asp-validation-for=Customer.BirthDate></span>
+            </div>
+        </div>
+        @*<div class="row mt-4">
+            @Html.LabelFor(c => c.Customer.BirthDate, labelText: "Date of Birth", new { @class = "col-sm-3 col-form-label"})
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control"})
+            </div>
+        </div>*@
+
+        <div class="row mt-4 form-check">
+            <div class="col-sm-6">
+                @Html.CheckBoxFor(c => c.Customer.isSubscribedToNewsletter, new { @class = "form-check-input"})
+            </div>
+            @Html.LabelFor(c => c.Customer.isSubscribedToNewsletter, labelText: "Subscribed To Newsletter?", new { @class = "form-check-label"})
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Save</button>
+    </div>
+@*}*@
+</form>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
