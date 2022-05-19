@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
 using Vidly.Data;
@@ -28,23 +29,23 @@ namespace Vidly.Controllers.Api
 
         // GET /api/customers/1
         [HttpGet("{id}")]
-        public CustomerDto GetCustomer(int id)
+        public IActionResult GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(x => x.Id == id);
 
             if (customer == null)
-                throw new ApplicationException(HttpContext.Response.StatusCode.ToString());
+                return NotFound();
 
-            return _mapper.Map<CustomerDto>(customer);
+            return Ok(_mapper.Map<CustomerDto>(customer));
         }
 
         // POST /api/customer
         [HttpPost]
-        public CustomerDto CreateCustomer(CustomerDto customerDto)
+        public IActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
             {
-                throw new ApplicationException(HttpContext.Response.StatusCode.ToString());
+                return BadRequest();
             }
 
             var customer = _mapper.Map<Customer>(customerDto);
@@ -53,7 +54,7 @@ namespace Vidly.Controllers.Api
 
             customerDto.Id = customer.Id;
 
-            return customerDto;
+            return Created(new Uri(Request.GetDisplayUrl() + customer.Id), customerDto);
         }
 
         [HttpPut("{id}")]
