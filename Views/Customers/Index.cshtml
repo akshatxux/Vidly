@@ -3,9 +3,9 @@
     ViewData["Title"] = "Customers";
 }
 
-<h1>Customers</h1>
+<h2 class="mb-4">Customers</h2>
 
-<table id="customers" class="table table-bordered table-hover mt-4">
+<table id="customers" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Customers</th>
@@ -14,14 +14,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var customer in Model)
-    {
-        <tr>
-            <td><a asp-controller="Customers" asp-action="Edit" asp-route-id="@customer.Id"> @customer.Name </a></td>
-            <td>@customer.MembershipType.Name</td>
-            <td><button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button></td>
-        </tr>
-    }
+    
     </tbody>
 
 </table>
@@ -30,6 +23,32 @@
 {
     <script>
         $(document).ready(function() {
+            $("#customers").DataTable({
+                respinsive: true,
+                autoWidth: false,
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, customer) {
+                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>"
+                        }
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function(data){
+                            return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>"
+                        }
+                    }
+                ]
+            });
+
             $("#customers").on("click", ".js-delete", function() {
                 var button = jQuery(this);
 

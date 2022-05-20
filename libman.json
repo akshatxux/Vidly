@@ -5,6 +5,20 @@
     {
       "library": "bootbox@5.5.3",
       "destination": "wwwroot/lib/bootbox/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables.net-bs5@1.12.1",
+      "destination": "wwwroot/lib/datatables.net-bs5/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "library": "datatables.net@1.12.1",
+      "destination": "wwwroot/lib/datatables.net/"
     }
   ]
 }
