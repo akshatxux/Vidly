@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "bootbox@5.5.3",
+      "destination": "wwwroot/lib/bootbox/"
+    }
+  ]
+}
