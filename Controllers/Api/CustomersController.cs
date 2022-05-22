@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Vidly.Models;
 using Vidly.Data;
 using Vidly.Dtos;
@@ -24,7 +25,10 @@ namespace Vidly.Controllers.Api
         // GET /api/customers
         public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList().Select(x => _mapper.Map<CustomerDto>(x));
+            return _context.Customers
+                .Include(x => x.MembershipType)
+                .ToList()
+                .Select(x => _mapper.Map<CustomerDto>(x));
         }
 
         // GET /api/customers/1

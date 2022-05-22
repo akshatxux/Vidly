@@ -18,6 +18,9 @@ namespace Vidly.Profiles
 
             CreateMap<Movie, MovieDto>();
             CreateMap<MovieDto, Movie>();
+
+            CreateMap<MembershipTypes, MembershipTypeDto>();
+            CreateMap<MembershipTypeDto, MembershipTypes>();
         }
     }
 }
