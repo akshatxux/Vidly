@@ -21,6 +21,9 @@ namespace Vidly.Profiles
 
             CreateMap<MembershipTypes, MembershipTypeDto>();
             CreateMap<MembershipTypeDto, MembershipTypes>();
+
+            CreateMap<Genres, GenreDto>();
+            CreateMap<GenreDto, Genres>();
         }
     }
 }

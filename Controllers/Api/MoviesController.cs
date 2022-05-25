@@ -5,6 +5,7 @@ using Vidly.Data;
 using Vidly.Models;
 using Vidly.Dtos;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vidly.Controllers.Api
 {
@@ -25,7 +26,10 @@ namespace Vidly.Controllers.Api
         [HttpGet]
         public IActionResult GetMovies()
         {
-            var moviesDto = _context.Movies.ToList().Select(movie => _mapper.Map<Movie, MovieDto>(movie));
+            var moviesDto = _context.Movies.
+                Include(m => m.Genre).
+                ToList().
+                Select(movie => _mapper.Map<Movie, MovieDto>(movie));
             return Ok(moviesDto);
         }
 
@@ -33,7 +37,9 @@ namespace Vidly.Controllers.Api
         [HttpGet("{id}")]
         public IActionResult GetMovie(int id)
         {
-            var movie = _context.Movies.SingleOrDefault(x => x.Id == id);
+            var movie = _context.Movies.
+                Include(_m => _m.Genre).
+                SingleOrDefault(x => x.Id == id);
 
             if (movie == null)
                 return NotFound();
