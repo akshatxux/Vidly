@@ -3,6 +3,7 @@ using Vidly.Models;
 using Vidly.ViewModels;
 using Vidly.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vidly.Controllers
 {
@@ -37,6 +38,7 @@ namespace Vidly.Controllers
             //return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IActionResult New()
         {
             var genreList = _context.Genres.ToList();
@@ -86,6 +88,11 @@ namespace Vidly.Controllers
         //movies
         public ActionResult Index()
         {
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
+            
+            return View("ReadOnlyList");
+
             //if (!pageIndex.HasValue)
             //    pageIndex = 1;
 
@@ -94,8 +101,7 @@ namespace Vidly.Controllers
 
             //return Content(string.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
 
-            List<Movie>? movies = _context.Movies.Include(m => m.Genre).ToList();
-            return View(movies);
+            //List<Movie>? movies = _context.Movies.Include(m => m.Genre).ToList();
         }
 
         [Route("Movies/Details/{id}")]
