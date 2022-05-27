@@ -24,3 +24,9 @@ body {
 .input-validation-error{
     border: 2px solid red;
 }
+
+.col-md-6 {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 50%;
+}
