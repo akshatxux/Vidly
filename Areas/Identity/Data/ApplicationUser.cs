@@ -8,5 +8,9 @@ namespace Vidly.Areas.Identity.Data
     {
         [Required]
         public string DrivingLicense { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
     }
 }

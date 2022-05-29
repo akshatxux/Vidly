@@ -6,6 +6,7 @@ using Vidly.Models;
 using Vidly.Dtos;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vidly.Controllers.Api
 {
@@ -51,6 +52,7 @@ namespace Vidly.Controllers.Api
 
         // POST /api/movies
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IActionResult CreateMovie(MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -68,6 +70,7 @@ namespace Vidly.Controllers.Api
 
         // PUT /api/movies/1
         [HttpPut("{id}")]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IActionResult UpdateMovie(int id, MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -86,6 +89,7 @@ namespace Vidly.Controllers.Api
 
         // DELETE /api/movies/1
         [HttpDelete("{id}")]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IActionResult DeleteMovie(int id)
         {
             var movieInDb = _context.Movies.SingleOrDefault(movie =>movie.Id == id);

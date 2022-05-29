@@ -89,6 +89,12 @@ namespace Vidly.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Driving License")]
             public string DrivingLicense { get; set; }
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            [Phone]
+            [StringLength(50)]
+            public string PhoneNumber { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -162,6 +168,7 @@ namespace Vidly.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
                 user.DrivingLicense = Input.DrivingLicense;
+                user.PhoneNumber = Input.PhoneNumber;
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
