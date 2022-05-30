@@ -66,7 +66,10 @@ namespace Vidly.Controllers
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;  //update date added field for new movies
+                movie.NumberAvailable = movie.NumberInStock;
             }
+            else
+                movie.NumberAvailable = movie.NumberInStock - _context.Rentals.Count(r => (r.Movie.Id == movie.Id) && (r.DateReturned == null));
 
             _context.Update(movie);
             _context.SaveChanges();

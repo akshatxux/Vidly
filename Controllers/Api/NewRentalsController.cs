@@ -24,7 +24,7 @@ namespace Vidly.Controllers.Api
             var customer = _context.Customers.Single(c => c.Id == newRentalDto.CustomerId);
 
             if (newRentalDto.MovieIds == null)
-                return BadRequest();
+                return BadRequest("Invalid movie list.");
 
             var movies = _context.Movies.Where(
                 m => newRentalDto.MovieIds.Contains(m.Id)).ToList();
@@ -34,6 +34,9 @@ namespace Vidly.Controllers.Api
                 if (movie == null)
                     continue;
 
+                if (movie.NumberAvailable == 0)
+                    return BadRequest($"The movie {movie.Name} is not available.");
+
                 var rental = new Rental()
                 {
                     Customer = customer,
@@ -42,6 +45,7 @@ namespace Vidly.Controllers.Api
                 };
 
                 _context.Rentals.Add(rental);
+                movie.NumberAvailable--;
             }
 
             _context.SaveChanges();

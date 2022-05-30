@@ -60,6 +60,7 @@ namespace Vidly.Controllers.Api
 
             var movie = _mapper.Map<Movie>(movieDto);
             movie.DateAdded = DateTime.Now;
+            movie.NumberAvailable = movie.NumberInStock;
             _context.Movies.Add(movie);
             _context.SaveChanges();
 
@@ -80,6 +81,9 @@ namespace Vidly.Controllers.Api
 
             if (movieInDb == null)
                 return NotFound();
+
+            if (movieInDb.NumberInStock != movieDto.NumberInStock)
+                movieInDb.NumberAvailable = movieInDb.NumberInStock - _context.Rentals.Count(r => (r.Movie.Id == movieInDb.Id) && (r.DateReturned == null));
 
             _mapper.Map(movieDto, movieInDb);
             _context.SaveChanges();
