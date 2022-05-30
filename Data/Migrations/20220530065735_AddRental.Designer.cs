@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vidly.Data;
 
@@ -11,9 +12,10 @@ using Vidly.Data;
 namespace Vidly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220530065735_AddRental")]
+    partial class AddRental
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,7 +258,7 @@ namespace Vidly.Data.Migrations
 
                     b.HasIndex("MembershipTypeId");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Vidly.Models.Genres", b =>
@@ -270,7 +272,7 @@ namespace Vidly.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("Vidly.Models.MembershipTypes", b =>
@@ -293,7 +295,7 @@ namespace Vidly.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MembershipTypes", (string)null);
+                    b.ToTable("MembershipTypes");
                 });
 
             modelBuilder.Entity("Vidly.Models.Movie", b =>
@@ -325,7 +327,7 @@ namespace Vidly.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Movies", (string)null);
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("Vidly.Models.Rental", b =>
@@ -354,7 +356,7 @@ namespace Vidly.Data.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Rentals", (string)null);
+                    b.ToTable("Rentals");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
