@@ -8,17 +8,13 @@
     },
     {
       "provider": "cdnjs",
-      "library": "datatables.net-bs5@1.12.1",
-      "destination": "wwwroot/lib/datatables.net-bs5/"
+      "library": "typeahead.js@0.11.1",
+      "destination": "wwwroot/lib/typeahead.js/"
     },
     {
       "provider": "cdnjs",
-      "library": "datatables@1.10.21",
-      "destination": "wwwroot/lib/datatables/"
-    },
-    {
-      "library": "datatables.net@1.12.1",
-      "destination": "wwwroot/lib/datatables.net/"
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toastr.js/"
     }
   ]
 }

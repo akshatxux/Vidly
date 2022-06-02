@@ -17,15 +17,17 @@ body {
   margin-bottom: 60px;
 }
 
-.field-validation-error{
+.field-validation-error,
+label.error{
     color: red;
 }
 
-.input-validation-error{
+.input-validation-error,
+input.error{
     border: 2px solid red;
 }
 
-.col-md-6 {
+.col-md-6{
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
     width: 50%;
