@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Vidly-05FF08F1-F6FA-4967-A7FF-71A11E411F62</UserSecretsId>
+    <Configurations>Debug;Release;Testing</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

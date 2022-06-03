@@ -5,6 +5,7 @@ using Vidly.Data;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Vidly.Areas.Identity.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -92,6 +93,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseStatusCodePages(Text.Plain, "Status Code Page: {0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
